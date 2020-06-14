@@ -1,0 +1,43 @@
+---
+version: https://codecheck.org.uk/spec/config/1.0
+
+paper:
+  title: >
+    Report 23: State-level tracking of COVID-19 in the United States
+    version 2 (28-05-2020)
+  authors:
+    - name: H Juliette T Unwin
+    - name: Swapnil Mistra
+    - name: Valerie C Bradley
+    - name: et al.
+      ORCID: https://orcid.org/0000-0002-3716-8013
+  reference: >
+    https://dx.doi.org/10.25561/79231
+
+manifest:
+  - file: Figure2.png
+    comment: manuscript Figure 2
+  - file: Figure3.png
+    comment: manuscript Figure 3
+  - file: Figure4.png
+    comment: manuscript Figure 4
+  - file: Figure5.png
+    comment: manuscript Figure 5
+  - file: Figure6.png
+    comment: manuscript Figure 6
+  - file: Figure7.png
+    comment: manuscript Figure 7
+  - file: Figure8.png
+    comment: manuscript Figure 8
+
+codechecker:
+  - name: Stephen J. Eglen
+    ORCID: 0000-0001-8607-8025
+
+summary: >
+  R code for this paper shared with an earlier codecheck certifice
+  (2020-011) from the same codebase.
+repository: https://github.com/sje30/covid19model-report23
+check_time: "2020-06-14 14:00:00"
+certificate: 2020-012
+report: https://doi.org/10.5281/zenodo.FIXME
