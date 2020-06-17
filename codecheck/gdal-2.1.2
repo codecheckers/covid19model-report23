@@ -1,0 +1,21 @@
+#%Module1.0
+
+module-whatis "GDAL is a translator library for raster and vector geospatial data formats that is released under an X/MIT style Open Source license by the Open Source Geospatial Foundation. As a library, it presents a single raster abstract data model and vector abstract data model to the calling application for all supported formats. It also comes with a variety of useful command line utilities for data translation and processing. "
+
+proc ModulesHelp { } {
+puts stderr "GDAL is a translator library for raster and vector geospatial data"
+puts stderr "formats that is released under an X/MIT style Open Source license by the"
+puts stderr "Open Source Geospatial Foundation. As a library, it presents a single"
+puts stderr "raster abstract data model and vector abstract data model to the calling"
+puts stderr "application for all supported formats. It also comes with a variety of"
+puts stderr "useful command line utilities for data translation and processing."
+}
+
+prepend-path PATH "/alt/applic/user-maint/kk562/gdal-2.1.2/bin"
+prepend-path LIBRARY_PATH "/alt/applic/user-maint/kk562/gdal-2.1.2/lib"
+prepend-path LD_LIBRARY_PATH "/alt/applic/user-maint/kk562/gdal-2.1.2/lib"
+prepend-path CPATH "/alt/applic/user-maint/kk562/gdal-2.1.2/include"
+prepend-path PKG_CONFIG_PATH "/alt/applic/user-maint/kk562/gdal-2.1.2/lib/pkgconfig"
+prepend-path CMAKE_PREFIX_PATH "/alt/applic/user-maint/kk562/gdal-2.1.2/"
+prepend-path PYTHONPATH "/alt/applic/user-maint/kk562/gdal-2.1.2/lib/python2.7/site-packages"
+

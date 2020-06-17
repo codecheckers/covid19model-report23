@@ -1,0 +1,206 @@
+---
+output:
+  pdf_document:
+    toc: false
+    includes:
+       in_header: codecheck-preamble.sty
+  html_document:
+    self_contained: false
+    toc: true
+    toc_float: false
+---
+
+```{r rsetup,eval=TRUE,include=FALSE}
+require(codecheck)
+require(knitr)
+require(rprojroot)
+require(yaml)
+require(xtable)
+require(tibble)
+require(readr)
+options(width=60)
+opts_chunk$set(cache=FALSE)
+
+root = find_root("codecheck.yml")
+```
+
+```{r codecheck_logo, echo=FALSE,results='asis'}
+latex_codecheck_logo()
+```
+
+```{r manifest, eval=TRUE, include=FALSE}
+metadata = codecheck_metadata(root)
+manifest = metadata$manifest
+
+dest_dir = file.path(root, "codecheck", "outputs")
+## Create the outputs directory if missing
+if ( !dir.exists(dest_dir) ) {
+  dir.create(dest_dir)
+}
+
+manifest_df = copy_manifest_files(root, manifest,
+                                  dest_dir, keep_full_path=FALSE)
+```
+
+---
+title: `r paste("CODECHECK certificate", metadata$certificate)`
+subtitle: `r codecheck:::as_latex_url(metadata$report)`
+---
+
+```{r summary_metadata, echo=FALSE, results='asis'}
+latex_summary_of_metadata(metadata)
+```
+
+```{r summary_manifest, echo=FALSE, results='asis'}
+latex_summary_of_manifest(manifest_df)
+```
+
+
+# Summary
+
+This code was (not) straightforward to codecheck.
+[... ADD MORE INTERESTING FINDINGS HERE..]
+
+\clearpage
+
+# CODECHECKER notes
+
+
+The github repository was cloned, and renamed to
+"covid19model-report23".  This reproduction was performed after
+finishing the related certificate
+[2020-010](https://doi.org/10.5281/zenodo.3893138); details of setting
+up the R environment are described in that certificate.
+
+Two extra problems though... geofacet and rgdal which needed system
+libraries to install.  Once the sysadmin had installed extra libraries
+for unitdevs2 and gdal, I needed to run the module
+
+```{sh, eval=FALSE}
+module load ./gdal-2.1.2
+```
+```{r, eval=FALSE}
+install.packages("rgdal")
+install.packages("geofacet")
+install.packages("denstrip") #for plotting
+```
+
+An initial run of the FULL model didn't work because I had an older
+version of rstan package; this was upgraded to 2.19.3.
+
+SUGGEST: add a list of the r packages required, and their versions, in
+the covid19model repository.
+
+the simulations were thus run by running the simulation directly on a
+workstation:
+
+
+```{sh, eval=FALSE}
+time Rscript base-usa.r
+```
+Running the test mode took 41 minutes and generated outputs.
+
+
+```{sh, eval=FALSE}
+time Rscript base-usa.r -F
+```
+
+Compared to the Certificate 2020-010, this was estimated to run in
+about 6 hours.
+
+1006697 is job number [2020-06-16 Tue]
+
+final run time was 1020 minutes (17 hours).
+
+The code for reproducing figures 1,2 and 3 was not available in the repository.
+
+
+\setcounter{table}{0}
+\setcounter{figure}{0}
+\captionsetup[table]{labelformat=addC}
+\captionsetup[figure]{labelformat=addC}
+
+\clearpage
+
+```{r, echo=FALSE, fig.cap=manifest_df[1:2,"comment"]}
+# TODO turn into a loop 
+knitr::include_graphics(manifest_df[1, "dest"])
+cat('\n\n')
+knitr::include_graphics(manifest_df[2, "dest"])
+cat('\n\n') 
+```
+
+\clearpage
+
+```{r, echo=FALSE, fig.cap=manifest_df[3:8,"comment"]}
+# TODO turn into a loop 
+knitr::include_graphics(manifest_df[3, "dest"])
+cat('\n\n')
+knitr::include_graphics(manifest_df[4, "dest"])
+cat('\n\n')
+knitr::include_graphics(manifest_df[5, "dest"])
+cat('\n\n')
+knitr::include_graphics(manifest_df[6, "dest"])
+cat('\n\n')
+knitr::include_graphics(manifest_df[7, "dest"])
+cat('\n\n')
+knitr::include_graphics(manifest_df[8, "dest"])
+```
+ 
+\clearpage
+
+
+```{r, echo=FALSE, fig.cap=manifest_df[9:13,"comment"]}
+# TODO turn into a loop 
+knitr::include_graphics(manifest_df[9, "dest"])
+cat('\n\n')
+knitr::include_graphics(manifest_df[10, "dest"])
+cat('\n\n')
+knitr::include_graphics(manifest_df[11, "dest"])
+cat('\n\n')
+knitr::include_graphics(manifest_df[12, "dest"])
+cat('\n\n')
+knitr::include_graphics(manifest_df[13, "dest"])
+```
+
+
+\clearpage
+
+## Acknowledgements
+
+I would like to thank Dr Bhatt and his team for promptly answering any
+queries I had with this reproduction.  Dr Kornet (Cambridge) provided
+technical support for the reproduction.  CODECHECK is financially
+supported by the Mozilla foundation.
+
+
+# Citing this document
+
+```{r, results='asis',echo=FALSE}
+citation(metadata)
+```
+
+# About CODECHECK
+
+This certificate confirms that the codechecker could independently
+reproduce the results of a computational analysis given the data and
+code from a third party.  A CODECHECK does not check whether the
+original computation analysis is correct.  However, as all materials
+required for the reproduction are freely available by following the
+links in this document, the reader can then study for themselves the
+code and data.
+
+
+# About this document
+
+This document was created using [R Markdown](https://rmarkdown.rstudio.com/) using the [`codecheck`](https://github.com/codecheckers/codecheck) R package.
+`make codecheck.pdf` will regenerate the report file.
+
+```{r}
+sessionInfo()
+```
+
+```{r, include=FALSE, eval=FALSE}
+# render this document in RStudio
+rmarkdown::render("codecheck.Rmd", output_format = "pdf_document") 
+```
