@@ -10,6 +10,7 @@ output:
     toc_float: false
 ---
 
+
 ```{r rsetup,eval=TRUE,include=FALSE}
 require(codecheck)
 require(knitr)
@@ -19,6 +20,9 @@ require(xtable)
 require(tibble)
 require(readr)
 options(width=60)
+require(patchwork)
+require(ggplot2)
+require(magick)
 opts_chunk$set(cache=FALSE)
 
 root = find_root("codecheck.yml")
@@ -52,8 +56,11 @@ latex_summary_of_metadata(metadata)
 ```
 
 ```{r summary_manifest, echo=FALSE, results='asis'}
-latex_summary_of_manifest(manifest_df)
+latex_summary_of_manifest(manifest_df,
+                          root,
+                          align=c('l', 'p{8cm}', 'p{6cm}', 'p{1cm}'))
 ```
+
 
 
 # Summary
@@ -75,7 +82,7 @@ took about 17 hours on a multicore workstation.
 In some cases, figures directly matched the layout in the manuscript;
 however, sometimes the figures have been post-processed as there are
 differences in layout.  For example, in Figure 4 of the manuscript,
-the states have been re-ordered vertical in order of the the value of
+the states have been re-ordered vertically in order of the value of
 R.  Likewise, in Figure 8, the plots have been expanded out over three
 columns.
 
@@ -90,7 +97,7 @@ the Github codecheckers group, as you cannot have two forks of the same project
 in the same organistion.)
 
 This reproduction was performed after finishing the related
-certificate [2020-010](https://doi.org/10.5281/zenodo.3893138);
+certificate [2020-011](https://doi.org/10.5281/zenodo.3893138);
 details of setting up the R environment are described in that
 certificate.
 
@@ -145,35 +152,38 @@ cat('\n\n')
 
 \clearpage
 
-```{r, echo=FALSE, fig.cap=manifest_df[3:8,"comment"]}
-# TODO turn into a loop 
-knitr::include_graphics(manifest_df[3, "dest"])
-cat('\n\n')
-knitr::include_graphics(manifest_df[4, "dest"])
-cat('\n\n')
-knitr::include_graphics(manifest_df[5, "dest"])
-cat('\n\n')
-knitr::include_graphics(manifest_df[6, "dest"])
-cat('\n\n')
-knitr::include_graphics(manifest_df[7, "dest"])
-cat('\n\n')
-knitr::include_graphics(manifest_df[8, "dest"])
+```{r, fig.height=10, echo=FALSE, fig.cap="Manuscript figure 6 (montage of 5 PDFs)."}
+p1 = image_ggplot( image_flip( image_read(manifest_df[3, "dest"] ) ) )
+p2 = image_ggplot( image_flip( image_read(manifest_df[4, "dest"] ) ) )
+p3 = image_ggplot( image_flip( image_read(manifest_df[5, "dest"] ) ) )
+p4 = image_ggplot( image_flip( image_read(manifest_df[6, "dest"] ) ) )
+p5 = image_ggplot( image_flip( image_read(manifest_df[7, "dest"] ) ) )
+p5 / p4 / p3 / p2 / p1  ## todo -- why upside down?
 ```
  
 \clearpage
 
-
-```{r, echo=FALSE, fig.cap=manifest_df[9:13,"comment"]}
+```{r, echo=FALSE, fig.cap=manifest_df[8,"comment"]}
 # TODO turn into a loop 
-knitr::include_graphics(manifest_df[9, "dest"])
-cat('\n\n')
-knitr::include_graphics(manifest_df[10, "dest"])
-cat('\n\n')
-knitr::include_graphics(manifest_df[11, "dest"])
-cat('\n\n')
-knitr::include_graphics(manifest_df[12, "dest"])
-cat('\n\n')
-knitr::include_graphics(manifest_df[13, "dest"])
+knitr::include_graphics(manifest_df[8, "dest"])
+
+```
+
+
+```{r, fig.height=6, echo=FALSE, fig.cap="Manuscript figure 8 (montage of 5 PDFs)."}
+p1 = image_ggplot( image_flip( image_read(manifest_df[9, "dest"] ) ) ) +
+  ggtitle("WA")
+p2 = image_ggplot( image_flip( image_read(manifest_df[10, "dest"] ) ) ) +
+    ggtitle("NY")
+p3 = image_ggplot( image_flip( image_read(manifest_df[11, "dest"] ) ) ) +
+  ggtitle("MA")
+p4 = image_ggplot( image_flip( image_read(manifest_df[12, "dest"] ) ) ) +
+  ggtitle("FL")
+p5 = image_ggplot( image_flip( image_read(manifest_df[13, "dest"] ) ) ) +
+  ggtitle("CA")
+p = p1 + p2 + p3 + p4 + p5
+## p = p5 / (p3 + p4) / (p1 + p2)
+p
 ```
 
 
