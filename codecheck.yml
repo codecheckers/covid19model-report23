@@ -1,35 +1,58 @@
 ---
 version: https://codecheck.org.uk/spec/config/1.0
 
+
+######################################################################
+# Section 1 -- information about the paper                           #
+######################################################################
+
 paper:
   title: >
     Report 23: State-level tracking of COVID-19 in the United States
     version 2 (28-05-2020)
   authors:
     - name: H Juliette T Unwin
+      ORCID: 0000-0002-9120-4003
     - name: Swapnil Mistra
     - name: Valerie C Bradley
     - name: et al.
-      ORCID: https://orcid.org/0000-0002-3716-8013
   reference: >
     https://dx.doi.org/10.25561/79231
 
 manifest:
-  - file: Figure2.png
-    comment: manuscript Figure 2
-  - file: Figure3.png
-    comment: manuscript Figure 3
-  - file: Figure4.png
-    comment: manuscript Figure 4
-  - file: Figure5.png
-    comment: manuscript Figure 5
-  - file: Figure6.png
-    comment: manuscript Figure 6
-  - file: Figure7.png
-    comment: manuscript Figure 7
-  - file: Figure8.png
-    comment: manuscript Figure 8
+  - file: usa/figures/rt_point__1006697.pdf
+    comment: Manuscript Figure 4
+  - file: usa/figures/1006697_rt_map_chloropleth.pdf
+    comment: Manuscript Figure 5
+  - file: usa/figures/WA_three_panel_1006697_.pdf
+    comment: Manuscript Figure 6 (Washington)
+  - file: usa/figures/NY_three_panel_1006697_.pdf
+    comment: Manuscript Figure 6 (New York)
+  - file: usa/figures/MA_three_panel_1006697_.pdf
+    comment: Manuscript Figure 6 (Massachusetts)
+  - file: usa/figures/FL_three_panel_1006697_.pdf
+    comment: Manuscript Figure 6 (Florida)
+  - file: usa/figures/CA_three_panel_1006697_.pdf
+    comment: Manuscript Figure 6 (California)
+  - file: usa/figures/1006697_infectiousness_regions.pdf
+    comment: Manuscript Figure 7
+  - file: usa/figures/WA_scenarios_56_0_20_40_1006697_deaths.pdf
+    comment: Manuscript Figure 8 (Washington)
+  - file: usa/figures/NY_scenarios_56_0_20_40_1006697_deaths.pdf
+    comment: Manuscript Figure 8 (New York)
+  - file: usa/figures/MA_scenarios_56_0_20_40_1006697_deaths.pdf
+    comment: Manuscript Figure 8 (Massachusetts)
+  - file: usa/figures/FL_scenarios_56_0_20_40_1006697_deaths.pdf
+    comment: Manuscript Figure 8 (Florida)
+  - file: usa/figures/CA_scenarios_56_0_20_40_1006697_deaths.pdf
+    comment: Manuscript Figure 8 (California)
 
+
+######################################################################
+# Section 2 -- information about the codecheck                       #
+######################################################################
+
+    
 codechecker:
   - name: Stephen J. Eglen
     ORCID: 0000-0001-8607-8025
