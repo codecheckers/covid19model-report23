@@ -70,7 +70,7 @@ reproducible.  I was able to re-run their code and generate
 qualitatively similar results to those shown in their manuscript.
 Differences in absolute values in results are due to the stochastic
 nature of the analysis.  All code to reproduce the data worked as
-expected, and all key datasets were provided.  I was able to regenrate
+expected, and all key datasets were provided.  I was able to regenerate
 the results in Figures 4--8 of the manuscript; code for Figures 1--3
 was not available.  (I did not attempt to go through all of the
 figures in the appendix, although Appendix D is an expanded version of
@@ -90,11 +90,11 @@ columns.
 
 # CODECHECKER notes
 
-The github repository
-<https://github.com/ImperialCollegeLondon/covid19model> was cloned, and renamed to
-"sje30/covid19model-report23".  (I could not clone the project into
-the Github codecheckers group, as you cannot have two forks of the same project
-in the same organistion.)
+The GitHub repository
+<https://github.com/ImperialCollegeLondon/covid19model> was cloned,
+and renamed to "sje30/covid19model-report23".  (I could not clone the
+project into the GitHub codecheckers group, as you cannot have two
+forks of the same project in the same organisation.)
 
 This reproduction was performed after finishing the related
 certificate [2020-011](https://doi.org/10.5281/zenodo.3893138);
@@ -104,35 +104,38 @@ certificate.
 However, the R environment described was insufficient, as it didn't
 include *geofacet* and *rgdal* packages which needed system libraries to install.
 Once the sysadmin had installed extra libraries for unitdevs2 and
-gdal, I needed to run the following adhoc module provided locally:
+gdal, I needed to run the following module provided locally:
 
 ```{sh, eval=FALSE}
 module load ./gdal-2.1.2
 ```
+
+The additional following R packages were required:
+
 ```{r, eval=FALSE}
 install.packages("rgdal")
 install.packages("geofacet")
 install.packages("denstrip") #for plotting
 ```
 
-An initial run of the FULL model didn't work because I had an older
-version of rstan package; this was upgraded to 2.19.3.  The
-simulations were tested by running the simulation directly on a
-workstation:
+The simulations were tested by running the simulation directly on a
+large (64-core) workstation:
 
 
 ```{sh, eval=FALSE}
 time Rscript base-usa.r
 ```
-Running the test mode took 41 minutes and generated outputs.
-
+Running the test mode took 41 minutes and generated outputs.  The full
+model was then run using:
 
 ```{sh, eval=FALSE}
 time Rscript base-usa.r -F
 ```
-The final run time was 1020 minutes (17 hours).  The code for
-reproducing figures 1,2 and 3 was not available in the repository, but
-all other key figures could be regenerated.
+(An initial run of the FULL model didn't work because I had an older
+version of rstan package; this was upgraded to 2.19.3.)  The final run
+time was 1020 minutes (17 hours).  The code for reproducing figures
+1,2 and 3 was not available in the repository, but all other key
+figures could be regenerated.
 
 
 \setcounter{table}{0}
