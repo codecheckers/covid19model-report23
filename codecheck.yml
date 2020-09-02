@@ -16,8 +16,7 @@ paper:
     - name: Swapnil Mistra
     - name: Valerie C Bradley
     - name: et al.
-  reference: >
-    https://dx.doi.org/10.25561/79231
+  reference: https://doi.org/10.25561/79231
 
 manifest:
   - file: usa/figures/rt_point__1006697.pdf
